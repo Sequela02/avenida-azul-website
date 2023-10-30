@@ -1,0 +1,15 @@
+/* Custom arrow styling */
+.next-arrow-custom:hover, .prev-arrow-custom:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+    cursor: pointer;
+}
+
+.next-arrow-custom svg, .prev-arrow-custom svg {
+    fill: currentColor;
+    transition: fill 0.3s ease-in-out;
+}
+
+.next-arrow-custom:hover svg, .prev-arrow-custom:hover svg {
+    fill: #007BFF; /* Change this to your preferred hover color */
+}

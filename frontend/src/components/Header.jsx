@@ -4,7 +4,7 @@ function Header() {
     const location = useLocation();
 
     return (
-        <div className="bg-gradient-to-r from-lightblue-400 to-blue-300 p-4 md:p-6 shadow-2xl">
+        <div className="bg-gradient-to-r from-lightblue-400 to-blue-300 p-4 md:p-6 shadow-1xl">
             <div className="container mx-auto flex flex-col md:flex-row justify-between items-center">
 
                 <div className="flex items-center">

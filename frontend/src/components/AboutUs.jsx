@@ -37,6 +37,10 @@ function AboutUs() {
             name: 'mob',
             description: 'Descripción detallada de la tercera pieza de arte.'
         },
+        {
+            name: 'mob',
+            description: 'Descripción detallada de la tercera pieza de arte.'
+        },
         // ... agregar cualquier otra pieza de arte con su descripción correspondiente
     ];
 
