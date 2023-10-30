@@ -1,208 +1,165 @@
-import React, {useEffect, useState} from "react";
-import 'aos/dist/aos.css';
+import React, { useState, useEffect } from 'react';
 import AOS from 'aos';
-import 'tailwindcss/tailwind.css';
+import 'aos/dist/aos.css';
 import Slider from "react-slick";
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
-
-
-function GalleryPage() {
-    useEffect(() => {
-        AOS.init();
-    }, []);
-    const arrowNext = <SampleNextArrow />;
-    const arrowPrev = <SamplePrevArrow />;
-
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 3,
-        slidesToScroll: 1,
-        nextArrow: <SampleNextArrow />,
-        prevArrow: <SamplePrevArrow />,
-        // Add the following to hide default arrows
-        className: "slick-next:before:hidden slick-prev:before:hidden",
-        responsive: [
+const sliderSettings = {
+    dots: false,
+    infinite: true,
+    speed: 500,
+    slidesToScroll: 1,
+};
+const ARTISTS = [
+    {
+        name: "Maestra",
+        artworks: [
             {
-                breakpoint: 1024,  // Breakpoint for medium screens
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                }
+                title: "Atardecer en el Bosque",
+                imageUrl: "/images/goku1.jpg",
+                date: "2023-01-05",
+                medium: "Acrylic on Canvas",
+                price: 150,
+                forSale: true,
+                description: "A vivid portrayal of a sunset amidst the dense woods."
             },
             {
-                breakpoint: 640,  // Breakpoint for small screens
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
-                }
+                title: "Retrato de una Dama",
+                imageUrl: "/images/escultura.jpg",
+                date: "2022-11-20",
+                medium: "Oil on Canvas",
+                forSale: false,
+                description: "An intricate portrait showcasing the details of a woman's visage."
+            },
+            {
+                title: "Marina Calma",
+                imageUrl: "/images/mob.jpg",
+                date: "2022-08-15",
+                medium: "Watercolor",
+                price: 100,
+                forSale: true,
+                description: "A calming sea view depicting serenity and stillness of the waters."
+            },
+            {
+                title: "Fourth Artwork",
+                imageUrl: "/images/escultura.jpg",
+                date: "2023-10-15",
+                medium: "Digital",
+                price: 200,
+                forSale: false,
+                description: "An abstract digital painting."
+            },
+            {
+                title: "Retrato de una Dama",
+                imageUrl: "/images/escultura.jpg",
+                date: "2022-11-20",
+                medium: "Oil on Canvas",
+                forSale: false,
+                description: "An intricate portrait showcasing the details of a woman's visage."
             }
         ]
+    },
+    {
+        name: "Juan",
+        artworks: [
+            {
+                title: "Landscape 1",
+                imageUrl: "/images/escultura.jpg",
+                date: "2023-01-02",
+                medium: "Photography",
+                price: 100,
+                forSale: true,
+                description: "A beautiful landscape of a mountain range."
+            }, {
+                title: "Landscape 1",
+                imageUrl: "/images/escultura.jpg",
+                date: "2023-01-02",
+                medium: "Photography",
+                price: 100,
+                forSale: true,
+                description: "A beautiful landscape of a mountain range."
+            }, {
+                title: "Landscape 1",
+                imageUrl: "/images/escultura.jpg",
+                date: "2023-01-02",
+                medium: "Photography",
+                price: 100,
+                forSale: true,
+                description: "A beautiful landscape of a mountain range."
+            }
+
+        ]
+    }
+];
+const getSliderSettings = (artworkCount, windowWidth) => ({
+    ...sliderSettings,
+    infinite: artworkCount > 1,
+    slidesToShow: windowWidth > 768 ? Math.min(artworkCount, 3) : 1,
+    centerMode: artworkCount < 3
+});
+
+export default function GalleryPage() {
+    const [zoomedImage, setZoomedImage] = useState(null);
+    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+
+    const handleArtworkClick = (imageUrl) => {
+        setZoomedImage(imageUrl);
     };
 
+    useEffect(() => {
+        AOS.init({ duration: 2000 });
 
-    const ARTISTS = [
-        {
-            name: "Maestra",
-            artworks: [
-                {
-                    title: "Atardecer en el Bosque",
-                    imageUrl: "/images/goku1.jpg",
-                    date: "2023-01-05",
-                    medium: "Acrylic on Canvas",
-                    price: 150,
-                    forSale: true,
-                    description: "A vivid portrayal of a sunset amidst the dense woods."
-                },
-                {
-                    title: "Retrato de una Dama",
-                    imageUrl: "/images/escultura.jpg",
-                    date: "2022-11-20",
-                    medium: "Oil on Canvas",
-                    forSale: false,
-                    description: "An intricate portrait showcasing the details of a woman's visage."
-                },
-                {
-                    title: "Marina Calma",
-                    imageUrl: "/images/mob.jpg",
-                    date: "2022-08-15",
-                    medium: "Watercolor",
-                    price: 100,
-                    forSale: true,
-                    description: "A calming sea view depicting serenity and stillness of the waters."
-                },
-                {
-                    title: "Marina Calma",
-                    imageUrl: "/images/mob.jpg",
-                    date: "2022-08-15",
-                    medium: "Watercolor",
-                    price: 100,
-                    forSale: true,
-                    description: "A calming sea view depicting serenity and stillness of the waters."
-                }
-            ]
+        const handleResize = () => {
+            setWindowWidth(window.innerWidth);
+        };
 
-        },  {
-            name: "Juan",
-            artworks: [
-                {
-                    title: "Atardecer en el Bosque",
-                    imageUrl: "/images/goku1.jpg",
-                    date: "2023-01-05",
-                    medium: "Acrylic on Canvas",
-                    price: 150,
-                    forSale: true,
-                    description: "A vivid portrayal of a sunset amidst the dense woods."
-                },
-                {
-                    title: "Retrato de una Dama",
-                    imageUrl: "/images/escultura.jpg",
-                    date: "2022-11-20",
-                    medium: "Oil on Canvas",
-                    forSale: false,
-                    description: "An intricate portrait showcasing the details of a woman's visage."
-                },
-                {
-                    title: "Marina Calma",
-                    imageUrl: "/images/mob.jpg",
-                    date: "2022-08-15",
-                    medium: "Watercolor",
-                    price: 100,
-                    forSale: true,
-                    description: "A calming sea view depicting serenity and stillness of the waters."
-                },
-                {
-                    title: "Marina Calma",
-                    imageUrl: "/images/mob.jpg",
-                    date: "2022-08-15",
-                    medium: "Watercolor",
-                    price: 100,
-                    forSale: true,
-                    description: "A calming sea view depicting serenity and stillness of the waters."
-                }
-            ]
-
-        }
-        ]
-    const [searchTerm, setSearchTerm] = useState('');
-    const [filter, setFilter] = useState('date');
-
+        window.addEventListener("resize", handleResize);
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
 
     return (
         <div className="container mx-auto px-4 py-12 bg-gradient-to-r from-blue-200 to-blue-100">
-            <div className="mb-8 flex border p-2 rounded-md shadow-md bg-white">
-                <input
-                    type="text"
-                    placeholder="🔍 Buscar..."
-                    value={searchTerm}
-                    onChange={e => setSearchTerm(e.target.value)}
-                    className="flex-grow px-3 py-2 border-0 outline-none"
-                />
-                <select
-                    value={filter}
-                    onChange={e => setFilter(e.target.value)}
-                    className="px-3 py-2 ml-2 border-0 rounded-md bg-blue-100 text-blue-800 cursor-pointer outline-none"
-                >
-                    <option value="date">Date</option>
-                    <option value="artist">Artist</option>
-                    <option value="price">Price</option>
-                    <option value="style">Style</option>
-                </select>
+            <div className="grid grid-cols-1 gap-y-12"> {/* Using grid for artists */}
+                {ARTISTS.map((artist, artistIndex) => (
+                    <div key={artist.name} className="flex flex-col h-[600px]" data-aos="fade-up"> {/* Set a fixed height for artist container */}
+                        <h3 className="text-2xl font-bold mb-4 text-blue-800">{artist.name}</h3>
+                        <Slider {...getSliderSettings(artist.artworks.length, windowWidth)}>
+                            {artist.artworks.map((artwork, index) => (
+                                <div key={artwork.title} className="p-2">
+                                    <div className="bg-white p-4 rounded-xl shadow-lg flex flex-col h-[500px] relative">
+                                        <div className="h-[200px] mb-2">
+                                            <img
+                                                src={artwork.imageUrl}
+                                                alt={artwork.title}
+                                                className="w-full h-full object-cover rounded-t-xl hover:opacity-90 transition-opacity duration-300 cursor-pointer"
+                                                onClick={() => handleArtworkClick(artwork.imageUrl)}
+                                            />
+                                        </div>
+                                        <div className="flex-grow flex flex-col justify-between overflow-auto">
+                                            <div>
+                                                <h4 className="text-lg font-bold mb-2 inline">{artwork.title}</h4>
+                                                {artwork.forSale && <span className="ml-2 bg-red-600 text-white py-1 px-2 rounded">For Sale</span>}
+                                                <p className="text-base text-gray-700 mt-2 overflow-ellipsis overflow-hidden">{artwork.description}</p>
+                                                <p className="text-sm text-gray-500 italic">{artwork.medium}</p>
+                                            </div>
+                                        </div>
+                                        {artwork.forSale && <p className="text-sm text-center text-red-600 font-bold absolute bottom-2 w-full">Available for ${artwork.price}</p>}
+                                    </div>
+                                </div>
+                            ))}
+                        </Slider>
+                    </div>
+                ))}
             </div>
 
-            {ARTISTS.map((artist, artistIndex) => (
-                <div key={artist.name} className="mb-12" data-aos="zoom-in" data-aos-delay={`${artistIndex * 100}`}>
-                    <h3 className="text-2xl font-bold mb-4 text-blue-800">{artist.name}</h3>
-                    <Slider {...settings}>
-                        {artist.artworks.map((artwork, index) => (
-                            <div key={artwork.title} className="p-2">
-                                <div className="bg-white p-4 rounded-xl shadow-lg transform hover:scale-105 transition-transform duration-300" data-aos="flip-left" data-aos-delay={`${index * 100}`}>
-                                    <img src={artwork.imageUrl} alt={artwork.title} className="w-full h-48 object-cover rounded-t-xl mb-2 hover:opacity-90 transition-opacity duration-300" />
-                                    <h4 className="text-lg font-bold mb-2">{artwork.title}</h4>
-                                    <p className="text-sm text-gray-700">{artwork.description}</p>
-                                    {artwork.forSale && <p className="text-sm mt-2 text-green-500">Available for ${artwork.price}</p>}
-                                </div>
-                            </div>
-                        ))}
-                    </Slider>
+            {zoomedImage && (
+                <div className="fixed inset-0 bg-black bg-opacity-75 flex justify-center items-center z-50">
+                    <button className="absolute top-4 right-4 text-white p-2 rounded" aria-label="Close" onClick={() => setZoomedImage(null)}>X</button>
+                    <img src={zoomedImage} alt="Zoomed Artwork" className="max-h-[80%] max-w-[90%]"/>
                 </div>
-            ))}
+            )}
         </div>
-    );
-}
-function SampleNextArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={`${className} next-arrow-custom`}
-            style={{ ...style, display: "block", background: "transparent", zIndex: 10 }}
-            onClick={onClick}
-        >
-            <svg className="transition-transform duration-300 transform hover:rotate-45" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 6L15 12L9 18" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-        </div>
-    );
-}
-
-function SamplePrevArrow(props) {
-    const { className, style, onClick } = props;
-    return (
-        <div
-            className={`${className} prev-arrow-custom`}
-            style={{ ...style, display: "block", background: "transparent", zIndex: 10 }}
-            onClick={onClick}
-        >
-            <svg className="transition-transform duration-300 transform hover:rotate-45" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15 6L9 12L15 18" stroke="black" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-            </svg>
-        </div>
-    );
-}
-
-
-
-export default GalleryPage;
+    );}
