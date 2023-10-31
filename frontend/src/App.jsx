@@ -7,6 +7,7 @@ import HomePage from "./components/HomePage";
 import Footer from './components/Footer';
 import GalleryPage from "./components/GalleryPage";
 import ContactPage from "./components/ContactPage";
+import WorkshopPage from "./components/WorkshopPage";
 /**
  * App Component
  *
@@ -32,7 +33,7 @@ function App() {
                     <Route path="/about" element={<AboutUs />} />
 
                     {/* Classes Page (Placeholder) */}
-                    <Route path="/classes" element={<div>Classes Page</div>} />
+                    <Route path="/classes" element={<WorkshopPage/>} />
 
                     {/* Gallery Page */}
                     <Route path="/gallery" element={<GalleryPage/>} />

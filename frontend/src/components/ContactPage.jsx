@@ -31,73 +31,48 @@ const ContactForm = () => {
 
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-4 bg-white p-8 rounded-lg shadow-md w-full max-w-xl mx-auto mt-12 border border-gray-200" data-aos="fade-up">
-            <div className="space-y-3">
-                <div>
-                    <label htmlFor="name" className="block text-lg font-medium text-gray-700 tracking-wide">
-                        Name
+        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-lg shadow-lg border border-gray-300" data-aos="fade-up">
+            {[
+                { id: 'name', type: 'text', label: 'Name' },
+                { id: 'email', type: 'email', label: 'Email' },
+                { id: 'subject', type: 'text', label: 'Subject' },
+            ].map(({ id, type, label }) => (
+                <div key={id} className="space-y-2">
+                    <label htmlFor={id} className="block text-lg font-medium text-gray-700 tracking-wide">
+                        {label}
                     </label>
                     <input
-                        type="text"
-                        name="name"
-                        id="name"
-                        value={formData.name}
+                        type={type}
+                        name={id}
+                        id={id}
+                        value={formData[id]}
                         onChange={handleChange}
-                        className="mt-1 p-3 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-transform transform hover:scale-105"
+                        className="mt-1 p-3 w-full bg-gray-100 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-transform transform hover:scale-105"
                     />
                 </div>
+            ))}
 
-                <div>
-                    <label htmlFor="email" className="block text-lg font-medium text-gray-700 tracking-wide">
-                        Email
-                    </label>
-                    <input
-                        type="email"
-                        name="email"
-                        id="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="mt-1 p-3 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-transform transform hover:scale-105"
-                    />
-                </div>
+            <div className="space-y-2">
+                <label htmlFor="message" className="block text-lg font-medium text-gray-700 tracking-wide">
+                    Message
+                </label>
+                <textarea
+                    name="message"
+                    id="message"
+                    rows="5"
+                    value={formData.message}
+                    onChange={handleChange}
+                    className="mt-1 p-3 w-full bg-gray-100 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-transform transform hover:scale-105"
+                ></textarea>
+            </div>
 
-                <div>
-                    <label htmlFor="subject" className="block text-lg font-medium text-gray-700 tracking-wide">
-                        Subject
-                    </label>
-                    <input
-                        type="text"
-                        name="subject"
-                        id="subject"
-                        value={formData.subject}
-                        onChange={handleChange}
-                        className="mt-1 p-3 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-transform transform hover:scale-105"
-                    />
-                </div>
-
-                <div>
-                    <label htmlFor="message" className="block text-lg font-medium text-gray-700 tracking-wide">
-                        Message
-                    </label>
-                    <textarea
-                        name="message"
-                        id="message"
-                        rows="4"
-                        value={formData.message}
-                        onChange={handleChange}
-                        className="mt-1 p-3 w-full border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-transform transform hover:scale-105"
-                    ></textarea>
-                </div>
-
-                <div>
-                    <button type="submit" className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-6 rounded-lg transform transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                        Submit
-                    </button>
-                </div>
+            <div>
+                <button type="submit" className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2 px-6 rounded-lg transform transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
+                    Submit
+                </button>
             </div>
         </form>
     );
-
 };
 
 // Main Contact Page Component
@@ -159,9 +134,10 @@ const ContactPage = () => {
 
 
     return (
-        <div className="container mx-auto p-4 space-y-8">
-            <h1 className="text-4xl font-bold">Contact Us</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div className="container mx-auto p-6 space-y-10">
+            <h1 className="text-4xl font-bold mb-6 transition-transform transform hover:scale-105">Contact Us</h1>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+
                 {/* Contact Form Section */}
                 <div>
                     <h2 className="text-2xl font-semibold mb-4">Send us a message</h2>
@@ -171,20 +147,27 @@ const ContactPage = () => {
                 {/* Contact Details and Map Section */}
                 <div>
                     <h2 className="text-2xl font-semibold mb-4">Find us</h2>
-                    {/* Replace this with a map component in the future */}
-                    <div className="bg-gray-300 h-60">
+                    {/* Map Component */}
+                    <div className="bg-gradient-to-r from-blue-100 to-blue-200 h-60 mb-4">
                         <MapComponent />
                     </div>
-                    <div className="mt-4">
-                        <h3 className="font-semibold">Address:</h3>
-                        <p>Blvd. Las Torres Esq. Leandro P. Gaxiola Col. Sonomex 83130 Hermosillo, Sonora, México</p>
-                        <h3 className="font-semibold mt-2">Phone:</h3>
-                        <p>+52 662 402 9609</p>
+                    {/* Contact Details */}
+                    <div className="space-y-2">
+                        <div>
+                            <h3 className="font-semibold">Address:</h3>
+                            <p>Blvd. Las Torres Esq. Leandro P. Gaxiola Col. Sonomex 83130 Hermosillo, Sonora, México</p>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold">Phone:</h3>
+                            <p>+52 662 402 9609</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     );
+
+
 };
 
 export default ContactPage;
