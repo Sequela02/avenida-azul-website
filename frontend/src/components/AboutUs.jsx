@@ -1,9 +1,18 @@
+// Importing required modules and components
+
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { VerticalTimeline, VerticalTimelineElement } from 'react-vertical-timeline-component';
 import 'react-vertical-timeline-component/style.min.css';
 
+/**
+ * AboutUs Component
+ *
+ * This component displays information about the organization, the owner, and their journey.
+ *
+ * @returns JSX.Element
+ */
 function AboutUs() {
     useEffect(() => {
         AOS.init({
@@ -47,35 +56,33 @@ function AboutUs() {
 
     return (
         <div className="bg-lightblue-200 min-h-screen px-8 py-12">
-
+            {/* Introduction Section */}
             <section className="py-12 bg-lightblue-200" data-aos="fade-up">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-4xl font-bold mb-8 text-center text-blue-800" data-aos="fade-zoom-in">¿Quiénes somos?</h2>
+                    <h2 className="text-4xl font-bold mb-8 text-center text-blue-800" data-aos="fade-zoom-in">Who Are We?</h2>
                     <p className="text-lg text-gray-700" data-aos="fade-in">
-                nos gusta oler pintura y thinner  </p>
-
-                    <img src="/images/testimage.jpg" alt="Workshop Introduction" className="mt-8 rounded-xl shadow-lg" data-aos="fade-left"/>
+                        We are passionate about art and creativity.
+                    </p>
+                    <img src="/images/escultura.jpg" alt="Workshop Introduction" className="mt-8 rounded-xl shadow-lg" data-aos="fade-left"/>
                 </div>
             </section>
-
-            {/* About the Owner */}
+            {/* About the Owner Section */}
             <section className="py-12 bg-white" data-aos="fade-up">
                 <div className="container mx-auto px-4 flex flex-col md:flex-row items-center">
                     <img src="/images/marian.jpg" alt="Owner" className="w-64 h-64 rounded-full shadow-lg mb-8 md:mb-0 md:mr-8" data-aos="fade-right"/>
                     <div data-aos="fade-left">
-                        <h2 className="text-4xl font-bold mb-4 text-blue-800">Sobre el dueño</h2>
+                        <h2 className="text-4xl font-bold mb-4 text-blue-800">About the Owner</h2>
                         <p className="text-lg text-gray-700">
-                            me gusta chambear y alv q machin chambeo
+                            Committed to fostering a community of artists and art enthusiasts.
                         </p>
-
                     </div>
                 </div>
             </section>
 
-            {/* About the Owner's Art */}
+            {/* About the Owner's Art Section */}
             <section className="py-12 bg-blue-100" data-aos="fade-up">
                 <div className="container mx-auto px-4">
-                    <h2 className="text-4xl font-bold mb-8 text-center text-blue-800" data-aos="fade-zoom-in">Arte del Dueño</h2>
+                    <h2 className="text-4xl font-bold mb-8 text-center text-blue-800" data-aos="fade-zoom-in">Owner's Art</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                         {ART_PIECES.map((artPiece, index) => (
                             <div key={artPiece.name} className="bg-white p-4 rounded-xl shadow-lg" data-aos={(index % 2 === 0) ? 'fade-left' : 'fade-right'}>
@@ -91,18 +98,16 @@ function AboutUs() {
                 </div>
             </section>
 
-
+            {/* Our Journey Section */}
             <section className="py-12 bg-gray-100" data-aos="fade-up">
                 <div className="container mx-auto px-4">
                     <h2 className="text-4xl font-bold mb-8 text-center text-blue-800" data-aos="fade-zoom-in">Our Journey</h2>
-
                     <VerticalTimeline>
                         {timelineData.map(event => (
                             <VerticalTimelineElement
                                 key={event.date}
                                 date={event.date}
                                 iconStyle={{ background: 'rgb(33, 150, 243)', color: '#fff' }}
-                                // You can also add a custom icon if you want
                                 data-aos="zoom-in"
                             >
                                 <h3 className="text-2xl font-bold">{event.title}</h3>
@@ -112,9 +117,9 @@ function AboutUs() {
                     </VerticalTimeline>
                 </div>
             </section>
-
         </div>
     );
 }
 
+// Exporting AboutUs component
 export default AboutUs;

@@ -130,7 +130,7 @@ const CallToActionSection = () => (
     <section className="py-12 bg-blue-50" data-aos="zoom-in-up">
         <div className="container mx-auto text-center">
             <h2 className="text-4xl font-bold mb-8">¿Listo para comenzar tu aventura en Avenida Azul?</h2>
-            <NavigationButton destination="/information" label="Empieza ahora" />
+            <NavigationButton destination="/contact     " label="Empieza ahora" />
         </div>
     </section>
 );
