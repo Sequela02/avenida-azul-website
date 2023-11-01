@@ -8,6 +8,7 @@ import Footer from './components/Footer';
 import GalleryPage from "./components/GalleryPage";
 import ContactPage from "./components/ContactPage";
 import WorkshopPage from "./components/WorkshopPage";
+import SocialFooter from "./components/SocialFooter";
 /**
  * App Component
  *
@@ -20,7 +21,7 @@ function App() {
         // Router component for handling routes
         <Router>
             {/* Main App container */}
-            <div className="App">
+            <div className="App " >
                 {/* Header component */}
                 <Header />
 
@@ -44,7 +45,7 @@ function App() {
 
                 </Routes>
             </div>
-
+            <SocialFooter/>
             {/* Footer component */}
             <Footer />
         </Router>

@@ -1,8 +1,15 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
+import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 // Contact Form Component
 const ContactForm = () => {
+    useEffect(() => {
+        AOS.init();
+    }, []);
     const [formData, setFormData] = React.useState({
         name: "",
         email: "",
@@ -31,11 +38,11 @@ const ContactForm = () => {
 
 
     return (
-        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-lg shadow-lg border border-gray-300" data-aos="fade-up">
-            {[
-                { id: 'name', type: 'text', label: 'Name' },
-                { id: 'email', type: 'email', label: 'Email' },
-                { id: 'subject', type: 'text', label: 'Subject' },
+        <form onSubmit={handleSubmit} className="space-y-6 bg-white p-8 rounded-lg shadow-md border border-gray-300" data-aos="fade-up">
+        {[
+                { id: 'name', type: 'text', label: 'Nombre' },
+                { id: 'email', type: 'email', label: 'Correo Electrónico' },
+                { id: 'subject', type: 'text', label: 'Asunto' },
             ].map(({ id, type, label }) => (
                 <div key={id} className="space-y-2">
                     <label htmlFor={id} className="block text-lg font-medium text-gray-700 tracking-wide">
@@ -51,10 +58,9 @@ const ContactForm = () => {
                     />
                 </div>
             ))}
-
             <div className="space-y-2">
                 <label htmlFor="message" className="block text-lg font-medium text-gray-700 tracking-wide">
-                    Message
+                    Mensaje
                 </label>
                 <textarea
                     name="message"
@@ -65,10 +71,9 @@ const ContactForm = () => {
                     className="mt-1 p-3 w-full bg-gray-100 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-transform transform hover:scale-105"
                 ></textarea>
             </div>
-
             <div>
                 <button type="submit" className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2 px-6 rounded-lg transform transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                    Submit
+                    Enviar
                 </button>
             </div>
         </form>
@@ -132,42 +137,59 @@ const ContactPage = () => {
     };
 
 
+// Mensaje predeterminado para WhatsApp
+    const mensajePredeterminado = "Hola, estoy interesado en obtener más información sobre sus servicios. ¿Podrían proporcionarme más detalles? Gracias.";
+
+    const linkWhatsApp = `https://wa.me/+526624029609?text=${encodeURIComponent(mensajePredeterminado)}`;
 
     return (
-        <div className="container mx-auto p-6 space-y-10">
-            <h1 className="text-4xl font-bold mb-6 transition-transform transform hover:scale-105">Contact Us</h1>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <div className="container mx-auto px-6 py-12 space-y-10 bg-gradient-to-t from-blue-100 via-purple-100 to-white">
+            <h1 className="text-4xl font-bold mb-6 py-12 transition-transform transform hover:scale-105" data-aos="fade-down">Creemos algo juntos</h1>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white p-6 rounded-lg shadow-xl transition-transform transform hover:scale-102" data-aos="fade-up">
 
                 {/* Contact Form Section */}
-                <div>
-                    <h2 className="text-2xl font-semibold mb-4">Send us a message</h2>
+                <div className="bg-purple-100 p-6 rounded-lg transition-shadow hover:shadow-md" data-aos="fade-right">
+                    <h2 className="text-2xl font-semibold mb-4">Envíanos un mensaje</h2>
                     <ContactForm />
                 </div>
-
                 {/* Contact Details and Map Section */}
-                <div>
-                    <h2 className="text-2xl font-semibold mb-4">Find us</h2>
+                <div className="bg-blue-100 p-6 rounded-lg transition-shadow hover:shadow-md" data-aos="fade-left">
+                <h2 className="text-2xl font-semibold mb-4">Encuéntranos</h2>
                     {/* Map Component */}
-                    <div className="bg-gradient-to-r from-blue-100 to-blue-200 h-60 mb-4">
+                    <div className="bg-gradient-to-r from-blue-100 to-blue-200 h-60 mb-4 " data-aos="fade-left">
                         <MapComponent />
                     </div>
                     {/* Contact Details */}
-                    <div className="space-y-2">
+                    <div className="space-y-4" data-aos="fade-left">
                         <div>
-                            <h3 className="font-semibold">Address:</h3>
+                            <h3 className="font-semibold text-xl">Dirección:</h3>
                             <p>Blvd. Las Torres Esq. Leandro P. Gaxiola Col. Sonomex 83130 Hermosillo, Sonora, México</p>
                         </div>
                         <div>
-                            <h3 className="font-semibold">Phone:</h3>
-                            <p>+52 662 402 9609</p>
+                            <h3 className="font-semibold text-xl">Teléfono:</h3>
+                            <p>
+                                <FontAwesomeIcon icon={faPhoneAlt} className="mr-2" />
+                                <a href="tel:6623387875" className="text-blue-500 hover:underline">662 338 7875</a>
+                            </p>
+                        </div>
+                        <div>
+                            <h3 className="font-semibold text-xl">WhatsApp:</h3>
+                            <p>
+                                <FontAwesomeIcon icon={faWhatsapp} className="mr-2 text-green-500" />
+                                <a href={linkWhatsApp} target="_blank" rel="noopener noreferrer" className="text-green-500 hover:underline">
+                                    662 402 9609
+                                </a>
+                            </p>
+                            <small className="block text-gray-500">Haz clic para enviar un mensaje por WhatsApp.</small>
                         </div>
                     </div>
+
+
                 </div>
             </div>
         </div>
     );
-
-
 };
 
 export default ContactPage;

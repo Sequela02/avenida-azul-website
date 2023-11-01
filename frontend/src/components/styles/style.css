@@ -1,0 +1,57 @@
+
+/* Custom styling for Slick Carousel */
+
+/* Navigation arrows */
+
+
+/* Dot navigation */
+.slick-dots li button:before {
+    color: #15638a !important;  /* Gray color for non-active dots */
+
+}
+
+.slick-dots li.slick-active button:before {
+    color: #3498db !important;  /* Blue color for the active dot */
+}
+
+/* Override slick arrow styles */
+.slick-prev:before, .slick-next:before {
+    font-family: 'Arial', serif;  /* Using a basic font family here */
+    font-size: 20px;
+    line-height: 1;
+    opacity: .75;
+    color: wheat;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+/* Specific styling for the previous arrow */
+.slick-prev:before {
+    content: '←';
+}
+
+/* Specific styling for the next arrow */
+.slick-next:before {
+    content: '→';
+}
+
+
+
+.slider-arrow {
+    background: rgba(197, 0, 0, 0.7);
+border: none;
+    border-radius: 50%;
+    padding: 8px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+
+    &:hover {
+        background: #eadcdc;
+    }
+}
+.prev-arrow {
+    left: 10px;
+}
+.next-arrow {
+    right: 10px;
+}

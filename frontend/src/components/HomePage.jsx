@@ -1,100 +1,107 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import { Link } from 'react-router-dom';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-
-/**
- * HomePage component - The landing page of the application.
- *
- * This component is responsible for rendering the landing page.
- * It includes sections such as Hero, Workshops, Testimonials, and Call to Action.
- */
+import '../components/styles/style.css';
+import { motion } from 'framer-motion';
 function HomePage() {
-
-    // Initialize AOS (Animate on Scroll) library
     useEffect(() => {
         AOS.init({
-            duration: 1000, // Animation duration in milliseconds
+            duration: 1000, // Shorter duration for quicker animations
         });
     }, []);
 
-    // List of workshops
     const workshops = ['pintura', 'escultura', 'dibujo'];
 
     return (
-        <div className="bg-lightblue-200 min-h-screen">
-
-            {/* Hero Section */}
+        <div className="bg-gradient-to-t from-blue-100 via-purple-100 purple-100 to-white min-h-screen">
             <HeroSection />
-
-            {/* Workshops Section */}
             <WorkshopsSection workshops={workshops} />
-
-            {/* Testimonials */}
             <TestimonialsSection />
-
-            {/* Call to Action */}
             <CallToActionSection />
-
         </div>
     );
 }
-
-/**
- * HeroSection component - Represents the hero section of the HomePage.
- */
 const HeroSection = () => (
-    <section className="relative h-screen flex justify-center items-center" data-aos="fade-up">
-        <img src="/images/background.jpg" alt="Art Workshop" className="absolute h-full w-full object-cover" />
-        <div className="absolute inset-0 bg-black opacity-50"></div>
-        <div className="relative z-10 text-center">
-            <h1 className="text-6xl font-extrabold text-white mb-4">¡Bienvenido a tu rincón del arte!</h1>
-            <p className="text-2xl font-medium text-white mb-6">Descubre el artista que hay en ti.</p>
-            <NavigationButton destination="/about" label="Ver más" />
+    <section className="relative min-h-screen flex justify-center items-center bg-white" data-aos="fade-down">
+        <div className="absolute inset-0">
+            <img src="/images/background.jpg" alt="Art Workshop" className="h-full w-full object-cover opacity-70" />
+        </div>
+        <div className="relative z-10 text-center p-4 md:p-0">
+            <h1 className="text-4xl md:text-6xl font-extrabold text-black mb-4">Unleash Your Inner Artist!</h1>
+            <p className="text-xl md:text-2xl font-medium text-black mb-6">Descubre, aprende, y crea.</p>
+            <NavigationButton destination="/about" label="Explore Now" />
         </div>
     </section>
 );
 
-/**
- * WorkshopsSection component - Represents the workshops section of the HomePage.
- *
- * @param {Object} props - Component properties.
- * @param {string[]} props.workshops - An array of workshops.
- */
-const WorkshopsSection = ({ workshops }) => (
-    <section className="py-12" data-aos="fade-left">
-        <div className="container mx-auto px-4">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                {workshops.map(workshop => (
-                    <WorkshopCard key={workshop} workshop={workshop} />
-                ))}
+
+const WorkshopsSection = ({ workshops }) => {
+    const bgStyle = {
+        background: 'linear-gradient( white)',
+    };
+
+    return (
+        <section className="py-12" style={bgStyle} data-aos="fade-up">
+            <div className="container mx-auto px-4">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    {workshops.map(workshop => (
+                        <WorkshopCard key={workshop} workshop={workshop} />
+                    ))}
+                </div>
             </div>
-        </div>
-    </section>
-);
+        </section>
+    );
+};
 
-/**
- * WorkshopCard component - Represents a single workshop card.
- *
- * @param {Object} props - Component properties.
- * @param {string} props.workshop - The type of workshop.
- */
-const WorkshopCard = ({ workshop }) => (
-    <div className="relative bg-white p-6 rounded-xl shadow-lg" data-aos="fade-left">
-        <img src={`/images/${workshop}.jpg`} alt={`${workshop} Workshop`} className="w-full h-48 object-cover rounded-t-xl" />
-        <div className="p-4">
-            <h3 className="text-2xl font-semibold mb-4">Talleres de {workshop}</h3>
-            <p className="text-blue-700">Aprende más sobre {workshop}.</p>
-        </div>
-    </div>
-);
 
-/**
- * TestimonialsSection component - Represents the testimonials section of the HomePage.
- */
+
+
+
+const WorkshopCard = ({ workshop }) => {
+    const hoverVariants = {
+        initial: { scale: 1 },
+        hover: { scale: 1.05 },
+    };
+
+    return (
+        <motion.div
+            className="relative bg-white p-6 rounded-xl shadow-lg transition-all duration-300 ease-in-out hover:shadow-xl"
+            data-aos="fade-up"
+            initial="initial"
+            whileHover="hover"
+            variants={hoverVariants}
+        >
+            <img
+                src={`/images/${workshop}.jpg`}
+                alt={`${workshop} Workshop`}
+                className="w-full h-48 object-cover rounded-t-xl transition-all duration-300 ease-in-out hover:opacity-80"
+            />
+            <div className="p-4">
+                <motion.h3
+                    className="text-2xl font-semibold mb-4 transition-all duration-300 ease-in-out hover:text-blue-600"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                >
+                    Talleres de {workshop}
+                </motion.h3>
+                <motion.p
+                    className="text-blue-700 transition-all duration-300 ease-in-out hover:text-blue-800"
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.4 }}
+                >
+                    Aprende más sobre {workshop}.
+                </motion.p>
+            </div>
+        </motion.div>
+    );
+};
+
 const TestimonialsSection = () => (
-    <section className="py-12 bg-blue-100" data-aos="fade-down">
-        <div className="container mx-auto px-4">
+    <section className="py-12 bg-white" data-aos="fade-down">
+    <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold mb-8 text-center text-blue-800">Lo que nuestros estudiantes dicen</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {[
@@ -109,13 +116,6 @@ const TestimonialsSection = () => (
     </section>
 );
 
-/**
- * TestimonialCard component - Represents a single testimonial card.
- *
- * @param {Object} props - Component properties.
- * @param {string} props.quote - The testimonial quote.
- * @param {string} props.author - The author of the quote.
- */
 const TestimonialCard = ({ quote, author }) => (
     <blockquote className="bg-white p-8 rounded-xl shadow-lg">
         <p className="text-2xl mb-6 text-gray-700">"{quote}"</p>
@@ -123,30 +123,42 @@ const TestimonialCard = ({ quote, author }) => (
     </blockquote>
 );
 
-/**
- * CallToActionSection component - Represents the call to action section of the HomePage.
- */
 const CallToActionSection = () => (
-    <section className="py-12 bg-blue-50" data-aos="zoom-in-up">
-        <div className="container mx-auto text-center">
+    <section className="py-12" data-aos="slide-right">
+    <div className="container mx-auto text-center">
             <h2 className="text-4xl font-bold mb-8">¿Listo para comenzar tu aventura en Avenida Azul?</h2>
-            <NavigationButton destination="/contact     " label="Empieza ahora" />
+            <NavigationButton destination="/contact" label="Empieza ahora" />
         </div>
     </section>
 );
 
-/**
- * NavigationButton component - A reusable navigation button.
- *
- * @param {Object} props - Component properties.
- * @param {string} props.destination - The URL to navigate to.
- * @param {string} props.label - The label for the button.
- */
-const NavigationButton = ({ destination, label }) => (
-    <button className="bg-blue-800 text-white px-8 py-4 rounded-full hover:bg-blue-700 active:bg-blue-900 focus:outline-none focus:ring-2 focus:ring-blue-600">
-        <Link to={destination}>{label}</Link>
-    </button>
-);
+
+
+const NavigationButton = ({ destination, label }) => {
+    const [isClicked, setIsClicked] = useState(false);
+
+    const handleClick = () => {
+        setIsClicked(true);
+        setTimeout(() => setIsClicked(false), 300); // Reset after 300ms
+        window.scrollTo(0, 0); // Lleva al usuario al inicio de la página
+    };
+
+    return (
+        <Link to={destination} onClick={handleClick}>
+            <button
+                className={`text-white px-8 py-4 rounded-full 
+                           bg-gradient-to-r from-blue-600 to-purple-600 drop-shadow-md
+                            hover:from-blue-700 hover:via-purple-700 hover:to-blue-700 
+                            active:from-blue-800 active:via-purple-800 active:to-blue-800  
+                            transition-all duration-300 ease-in-out transform hover:scale-105 hover:-rotate-3
+                            ${isClicked ? 'animate-bounce' : ''}`}
+            >
+                {label}
+            </button>
+        </Link>
+    );
+};
+
 
 
 export default HomePage;
