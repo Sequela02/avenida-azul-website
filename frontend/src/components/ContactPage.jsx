@@ -4,6 +4,7 @@ import 'aos/dist/aos.css';
 import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
 import { faWhatsapp } from '@fortawesome/free-brands-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {findAllByDisplayValue} from "@testing-library/react";
 
 // Contact Form Component
 const ContactForm = () => {
@@ -200,7 +201,8 @@ const ContactPage = () => {
     const linkWhatsApp = `https://wa.me/+526624029609?text=${encodeURIComponent(mensajePredeterminado)}`;
 
     return (
-        <div className="container mx-auto px-6 py-12 space-y-10 bg-gradient-to-t from-blue-100 via-purple-100 to-white">
+        <div className=" bg-gradient-to-t from-blue-100 via-purple-100 to-white">
+        <div className="container mx-auto px-6 py-12 space-y-10 b">
             <h1 className="text-4xl font-bold mb-6 py-12 transition-transform transform hover:scale-105" data-aos="fade-down">Creemos algo juntos</h1>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 bg-white p-6 rounded-lg shadow-xl transition-transform transform hover:scale-102" data-aos="fade-up">
@@ -245,7 +247,7 @@ const ContactPage = () => {
 
                 </div>
             </div>
-        </div>
+        </div></div>
     );
 };
 
