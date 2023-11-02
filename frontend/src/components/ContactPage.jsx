@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { faPhoneAlt } from '@fortawesome/free-solid-svg-icons';
@@ -10,25 +10,78 @@ const ContactForm = () => {
     useEffect(() => {
         AOS.init();
     }, []);
-    const [formData, setFormData] = React.useState({
-        name: "",
+
+    const [formData, setFormData] = useState({
+        Nombre: "",
         email: "",
-        subject: "",
-        message: ""
+        Asunto: "",
+        mensaje: ""
     });
+
+    const [sendStatus, setSendStatus] = useState('notSent');  // notSent | sending | sent | error
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({
-            ...formData,
+        setFormData((prevData) => ({
+            ...prevData,
             [name]: value,
-        });
+        }));
     };
+
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log("Form data submitted:", formData);
+        console.log(formData);
+
+        // Crear el objeto que vas a enviar
+        const dataToSend = {
+            nombre: formData.name,
+            email: formData.email,
+            asunto: formData.subject,
+            mensaje: formData.message,
+        };
+
+        // Mostrar el objeto que estás enviando para verificar
+        console.log('Sending:', dataToSend);
+
+        setSendStatus('sending');
+
+        fetch('http://localhost:8080/contact', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(dataToSend),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(data => {
+                console.log('Success:', data);
+                setSendStatus('sent');
+
+                // Resetear el estado después de un tiempo
+                setTimeout(() => setSendStatus('notSent'), 3000);
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                setSendStatus('error');
+
+                // Resetear el estado después de un tiempo
+                setTimeout(() => setSendStatus('notSent'), 3000);
+            });
     };
+
+    const buttonText = {
+        notSent: 'Enviar',
+        sending: 'Enviando...',
+        sent: 'Enviado!',
+        error: 'No enviado'
+    };
+
     // Map Component
     // This needs to be global for Google Maps to call it
     window.initMap = () => {
@@ -72,8 +125,11 @@ const ContactForm = () => {
                 ></textarea>
             </div>
             <div>
-                <button type="submit" className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2 px-6 rounded-lg transform transition-transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50">
-                    Enviar
+                <button
+                    type="submit"
+                    className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 text-white font-bold py-2 px-6 rounded-lg transform transition-transform hover:scale-105 active:scale-95 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50"
+                >
+                    {buttonText[sendStatus]}
                 </button>
             </div>
         </form>
