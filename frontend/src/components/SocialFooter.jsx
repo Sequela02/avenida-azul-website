@@ -1,8 +1,7 @@
 import React, { useEffect } from 'react';
 import AOS from 'aos';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faInstagram, faFacebookF, faTwitter } from '@fortawesome/free-brands-svg-icons';
-import { faPhoneAlt, faWhatsapp } from '@fortawesome/free-solid-svg-icons';
+import { faInstagram, faFacebookF } from '@fortawesome/free-brands-svg-icons';
 
 
 const SocialFooter = () => {

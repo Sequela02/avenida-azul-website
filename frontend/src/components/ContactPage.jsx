@@ -15,7 +15,7 @@ const ContactForm = () => {
         Nombre: "",
         email: "",
         Asunto: "",
-        mensaje: ""
+        Mensaje: ""
     });
 
     const [sendStatus, setSendStatus] = useState('notSent');  // notSent | sending | sent | error
