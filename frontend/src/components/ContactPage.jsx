@@ -180,11 +180,12 @@ const ContactPage = () => {
             });
 
             // Add a marker
-            const marker = new window.google.maps.Marker({
+            new window.google.maps.Marker({
                 position: location,
                 map: map,
                 title: '83139, Fraccionamiento las Torres, 83139 Hermosillo, Son.'
             });
+
         }
 
         return (

@@ -1,6 +1,10 @@
-// tailwind.config.js
+/** @type {import('tailwindcss').Config} */
 
 module.exports = {
+  plugins: [
+    require('postcss-nested'), // <-- Esto debe ir primero
+    require('tailwindcss'),
+  ],
   content: ['./src/**/*.{js,jsx,ts,tsx}', './public/index.html'],
   darkMode: 'class',  // This will help with implementing dark mode later on
   variants: {
