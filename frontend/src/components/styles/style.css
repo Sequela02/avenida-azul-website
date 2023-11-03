@@ -36,19 +36,19 @@
 }
 
 
-
 .slider-arrow {
     background: rgba(197, 0, 0, 0.7);
-border: none;
+    border: none;
     border-radius: 50%;
     padding: 8px;
     cursor: pointer;
     transition: background 0.3s ease;
-
-    &:hover {
-        background: #eadcdc;
-    }
 }
+
+.slider-arrow:hover {
+    background: #eadcdc;
+}
+
 .prev-arrow {
     left: 10px;
 }
