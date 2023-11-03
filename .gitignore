@@ -1,8 +1,7 @@
+# Archivos y directorios generados automáticamente y/o específicos de la herramienta
 HELP.md
 target/
 !.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
 
 ### STS ###
 .apt_generated
@@ -14,20 +13,27 @@ target/
 .sts4-cache
 
 ### IntelliJ IDEA ###
-.idea
+.idea/
 *.iws
 *.iml
 *.ipr
 .env
+
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
 /dist/
 /nbdist/
 /.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-src/main/resources/application.properties
+
 ### VS Code ###
 .vscode/
+
+# Archivos específicos del proyecto que deseas ignorar
+src/main/resources/application.properties
+
+# Asegúrate de que las carpetas target y build no estén siendo ignoradas en tus carpetas principales
+!**/src/main/**/target/
+!**/src/test/**/target/
+!**/src/main/**/build/
+!**/src/test/**/build/
