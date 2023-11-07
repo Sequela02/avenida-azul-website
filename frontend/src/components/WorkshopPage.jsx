@@ -5,33 +5,65 @@ import 'aos/dist/aos.css';
 const workshopsData = [
     {
         id: 1,
-        title: 'Taller de Dibujo',
-        medium: 'Grafito',
+        title: 'Taller de dibujo artístico',
+        mediums: ['grafito', 'carbón', 'tizas', 'tinta china', 'lápices de colores'],
+        ageRange: '13+',
         image: '/images/goku1.jpg' ,
-        description: 'Learn the intricate techniques of oil painting...',
-        price: 50,
-        ageRange: '18+',
-        duration: '2 Hours',
-        schedule: 'Lunes, Miercoles y Viernes',
-        hora: '3:00 a 5:00 PM'
-        //... add other details like materials, schedules, and prerequisites
+        duration: '2 horas',
+        days: ['lunes', 'miércoles', 'sábado'],
+        timeSlots: {
+            'lunes': '4-6 pm',
+            'miércoles': '4-6 pm',
+            'sábado': '10am-12'
+        },
+        price: 900, // mensualidad por 4 clases, una por semana
     },
     {
-        id: 1,
-        title: 'Taller de oleo sobre lienzo',
-            medium: 'Oleo',
-        image: '/images/background2.jpg' ,
-        description: 'Learn the intricate techniques of oil painting...',
-        price: 50,
-        ageRange: 'Cualquier edad',
-
-        duration: '1 Hora',
-        schedule: 'Martes y Jueves',
-        hora: '1:00 a 3:00 PM'
-        //... add other details like materials, schedules, and prerequisites
+        id: 2,
+        title: 'Taller de pintura',
+        mediums: ['acrílico', 'acuarela', 'gouache'],
+        image: '/images/goku1.jpg' ,
+        ageRange: '4+',
+        duration: '2 horas',
+        days: ['martes', 'miércoles', 'jueves'],
+        timeSlots: {
+            'martes': ['4-6 pm', '5-7 pm'],
+            'miércoles': ['4-6 pm', '5-7 pm'],
+            'jueves': ['4-6 pm', '5-7 pm']
+        },
+        price: 1300, // mensualidad por 4 clases, una por semana
+    },
+    {
+        id: 3,
+        title: 'Taller de pintura al óleo',
+        mediums: ['óleo', 'óleo pastel'],
+        image: '/images/goku1.jpg' ,
+        ageRange: '18+',
+        duration: '2 horas',
+        days: ['lunes', 'miércoles', 'sábado'],
+        timeSlots: {
+            'lunes': '6-8 pm',
+            'miércoles': '6-8 pm',
+            'sábado': '12-2 pm'
+        },
+        price: 1300, // mensualidad por 4 clases, una por semana
+    },
+    {
+        id: 4,
+        title: 'Taller de modelado con arcilla',
+        mediums: ['arcilla fría'],
+        ageRange: '8+',
+        image: '/images/goku1.jpg' ,
+        duration: '1hr y media',
+        days: ['sábado'],
+        timeSlots: {
+            'sábado': '10 am a 11:30 pm'
+        },
+        price: 1000, // mensualidad por 4 clases, una por semana
     },
     //... other workshop data
 ];
+
 
 
 
