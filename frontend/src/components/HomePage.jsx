@@ -98,16 +98,15 @@ const WorkshopCard = ({ workshop }) => {
         </motion.div>
     );
 };
-
 const TestimonialsSection = () => (
     <section className="py-12 bg-white" data-aos="fade-down">
-    <div className="container mx-auto px-4">
+        <div className="container mx-auto px-4">
             <h2 className="text-4xl font-bold mb-8 text-center text-blue-800">Lo que nuestros estudiantes dicen</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                 {[
-                    { quote: "Muy guape la maestra.", author: "Juan Mendoza" },
-                    { quote: "No bebas y conduzcas, pero si lo haces, llámame.", author: "Saul Goodman" },
-                    { quote: "Amosaimiapa.", author: "yatelasabe" },
+                    { quote: "Este curso ha sido una experiencia transformadora. Los conceptos se explicaron con claridad y pude aplicarlos en mi trabajo diario.", author: "Ana López" },
+                    { quote: "Los instructores son increíbles, con un conocimiento profundo y una pasión que realmente inspira. He aprendido más de lo que esperaba.", author: "Carlos Hernández" },
+                    { quote: "La calidad de los materiales y las lecciones interactivas hacen de este programa uno de los mejores en los que he participado. ¡Totalmente recomendado!", author: "María González" },
                 ].map((testimonial, index) => (
                     <TestimonialCard key={index} {...testimonial} />
                 ))}
