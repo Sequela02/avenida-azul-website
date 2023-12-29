@@ -17,7 +17,7 @@ const SocialFooter = () => {
     ];
 
     return (
-        <footer className="bg-gradient-to-t from-white to-blue-100 py-8" data-aos="fade-down">
+        <footer className="bg-gradient-to-t from-white to-blue-100 py-8" data-aos="fade-up">
             <div className="container mx-auto text-center">
                 <h1 className="text-3xl font-bold mb-2" data-aos="fade-down">
                     ¡Síguenos para más novedades!

@@ -28,7 +28,7 @@ const HeroSection = () => (
             <img src="/images/background.jpg" alt="Art Workshop" className="h-full w-full object-cover opacity-70" />
         </div>
         <div className="relative z-10 text-center p-4 md:p-0">
-            <h1 className="text-4xl md:text-6xl font-extrabold text-black mb-4">Unleash Your Inner Artist!</h1>
+            <h1 className="text-4xl md:text-6xl font-extrabold text-black mb-4">¡Descubre tu artista interno!</h1>
             <p className="text-xl md:text-2xl font-medium text-black mb-6">Descubre, aprende, y crea.</p>
             <NavigationButton destination="/about" label="Explore Now" />
         </div>
